@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Grid
   - Water
   - UI
   - 
@@ -40,4 +40,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ocean
+    uniqueID: 3465161365
+    locked: 0
+  - name: Land
+    uniqueID: 2882525867
+    locked: 0
+  - name: Border
+    uniqueID: 1507688591
+    locked: 0
+  - name: UI
+    uniqueID: 601304409
     locked: 0
