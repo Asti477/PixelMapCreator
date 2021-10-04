@@ -36,8 +36,10 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\DrawPixel.cs" />
-     <Compile Include="Assets\Scripts\CameraResolution.cs" />
+     <Compile Include="Assets\Scripts\LandTileManager.cs" />
+     <Compile Include="Assets\Scripts\CameraManager.cs" />
+     <Compile Include="Assets\Scripts\OceanTileManager.cs" />
+     <Compile Include="Assets\Scripts\BorderTileManager.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/Applications/Unity/Hub/Editor/2020.3.13f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

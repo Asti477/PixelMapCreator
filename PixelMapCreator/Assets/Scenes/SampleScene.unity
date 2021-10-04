@@ -294,7 +294,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.9528302, g: 0.86330616, b: 0.7146226, a: 0}
+  m_BackGroundColor: {r: 1, g: 0.9164089, b: 0.7783019, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1415,6 +1415,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2145527516}
   - component: {fileID: 2145527515}
+  - component: {fileID: 2145527518}
+  - component: {fileID: 2145527517}
   m_Layer: 0
   m_Name: TileManager
   m_TagString: Untagged
@@ -1434,9 +1436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eca2af0fd08a4c05a8f5d42da3d8004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tmapBorder: {fileID: 985232269}
   tmap: {fileID: 522042648}
-  tmapOcean: {fileID: 2091304142}
   landTiles:
   - {fileID: 11400000, guid: 801f06c1a0d3846d9aa1d938696a423a, type: 2}
   - {fileID: 11400000, guid: 94c9f1c8a834947028d5d83a5af8d941, type: 2}
@@ -1445,8 +1445,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a8b63d5e0d8ba4a6792637fffc9aaa78, type: 2}
   - {fileID: 11400000, guid: 81c1ad3eea75d432dbb12e9f16469cc1, type: 2}
   - {fileID: 11400000, guid: 76bc102a04a94400db3d4eb17f9446ab, type: 2}
-  border: {fileID: 11400000, guid: 0f8e0c9fc7114429d850a6dd9c526305, type: 2}
-  ocean: {fileID: 11400000, guid: 7a90dca9b8de145a1a61ef3af05749d5, type: 2}
   brushSlider: {fileID: 336316113}
   w: 40
   h: 40
@@ -1464,3 +1462,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2145527517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145527514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7a2dee97c7f942ebb69542514e61117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tmapBorder: {fileID: 985232269}
+  border: {fileID: 11400000, guid: 0f8e0c9fc7114429d850a6dd9c526305, type: 2}
+  ocean: {fileID: 11400000, guid: 7a90dca9b8de145a1a61ef3af05749d5, type: 2}
+  TileManager: {fileID: 2145527514}
+--- !u!114 &2145527518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145527514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c993ed648c3d347368a676b4b7d38a24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tmapOcean: {fileID: 2091304142}
+  ocean: {fileID: 11400000, guid: 7a90dca9b8de145a1a61ef3af05749d5, type: 2}
+  TileManager: {fileID: 2145527514}
