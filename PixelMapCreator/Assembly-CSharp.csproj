@@ -36,10 +36,12 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\TouchControls.cs" />
+     <Compile Include="Assets\Scripts\ZoomDetect.cs" />
+     <Compile Include="Assets\Scripts\BorderTileManager.cs" />
      <Compile Include="Assets\Scripts\LandTileManager.cs" />
      <Compile Include="Assets\Scripts\CameraManager.cs" />
-     <Compile Include="Assets\Scripts\OceanTileManager.cs" />
-     <Compile Include="Assets\Scripts\BorderTileManager.cs" />
+     <Compile Include="Assets\Scripts\MapBorderManager.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/Applications/Unity/Hub/Editor/2020.3.13f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

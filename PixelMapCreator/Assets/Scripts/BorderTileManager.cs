@@ -15,37 +15,9 @@ public class BorderTileManager : MonoBehaviour
     int w;
     int h;
 
-    void setUpBorder()
+    public void setUpBorder()
     {
-        for(int x = -w; x < 2 * w; x++)
-        {
-            for(int y = -h; y < 0; y++)
-            {
-                tmapBorder.SetTile(new Vector3Int(x, y, 0), ocean);
-            }
-        }
-        for(int x = -w; x < 2 * w; x++)
-        {
-            for(int y = h; y < 2 * h; y++)
-            {
-                tmapBorder.SetTile(new Vector3Int(x, y, 0), ocean);
-            }
-        }
-        for(int x = -w; x < 0; x++)
-        {
-            for(int y = 0; y < h; y++)
-            {
-                tmapBorder.SetTile(new Vector3Int(x, y, 0), ocean);
-            }
-        }
-        for(int x = w; x < 2 * w; x++)
-        {
-            for(int y = 0; y < h; y++)
-            {
-                tmapBorder.SetTile(new Vector3Int(x, y, 0), ocean);
-            }
-        }
-
+        
         for(int x = 0; x < w + 1; x++)
         {
             tmapBorder.SetTile(new Vector3Int(x, 0, 0), border);
