@@ -22,6 +22,8 @@ public class MapBorderManager : MonoBehaviour
         h = dp.h;
     }
 
+    
+
     // Update is called once per frame
     void Update()
     {

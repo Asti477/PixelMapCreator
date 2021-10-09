@@ -5,17 +5,27 @@ using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour
 {
-    public float horizontalResolution = 1920;
     [SerializeField] GameObject TileManager;
+    float zoomSpeed = 0.04f;
     private Camera camera;
+    Touch firstTouch;
+    Touch secondTouch;
+
+    public float horizontalResolution = 1920f;
+    float currentAspect;
+    float cameraSize;
 
     float w;
     float h;
+    int size = 3000;
+    float sizeAdd = 0f;
     
     private TouchControls controls;
     private Coroutine zoomCoroutine;
     void Awake()
     {
+        Debug.Log("camera size:" + cameraSize);
+
         controls = new TouchControls();
         camera = Camera.main;
 
@@ -23,21 +33,6 @@ public class CameraManager : MonoBehaviour
         w = dp.w;
         h = dp.h;
         camera.transform.position = new Vector3(w/2, h/2, -10);
-    }
-    private void OnEnable()
-    {
-        controls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Disable();
-    }
-
-    void Start()
-    {
-        controls.Touch.SecondaryTouchContact.started += _ => ZoomStart();
-        controls.Touch.SecondaryTouchContact.started += _ => ZoomEnd();
     }
 
     private void ZoomStart()
@@ -50,50 +45,62 @@ public class CameraManager : MonoBehaviour
         StopCoroutine(zoomCoroutine);
     }
 
+    private void changeSizeAdd(int sign)
+    {
+        sizeAdd += sign * zoomSpeed;
+    }
+
     IEnumerator ZoomDetection()
     {
         float previousDistance = 0f, distance = 0f;
 
         while(true)
         {
-            distance = Vector2.Distance(controls.Touch.PrimaryFingerPos.ReadValue<Vector2>(),
-            controls.Touch.SecondaryFingerPos.ReadValue<Vector2>());
+            distance = Vector2.Distance(firstTouch.position, secondTouch.position);
 
-            if(distance > previousDistance)
+            if(distance > previousDistance && sizeAdd > -0.7 * cameraSize)
             {
-
+                changeSizeAdd(-1);
+                Debug.Log("sizeAdd: " + sizeAdd);
             }
-            else if(distance < previousDistance)
+            else if(distance < previousDistance && sizeAdd < 2.5 * cameraSize)
             {
-
+                changeSizeAdd(1);
+                Debug.Log("sizeAdd: " + sizeAdd);
             }
 
             previousDistance = distance;
+            yield return null;
         }
     }
     void Update()
     {
         if(Input.touchCount == 2)
         {
-            // touch = Input.GetTouch(0);
+            firstTouch = Input.GetTouch(0);
+            secondTouch = Input.GetTouch(1);
 
-            // if(touch.phase == TouchPhase.Began)
-            //     paint();
-            // if(touch.phase == TouchPhase.Moved)
-            //     paint();
+            if(firstTouch.phase == TouchPhase.Began)
+                Debug.Log("hi");
+            if(firstTouch.phase == TouchPhase.Moved || secondTouch.phase == TouchPhase.Moved)
+                ZoomStart();
+            if(firstTouch.phase == TouchPhase.Ended || secondTouch.phase == TouchPhase.Ended)
+                ZoomEnd();
         }
+            
     }
     
     public void OnGUI ()
     {
         float n = 50f;
-
+    
         if(w > h && w > 10)
-            n = 3000/w;
+            n = (size/w);
         else if(w <= h && h > 10)
-            n = 3000/h;
+            n = (size/h);
 
-        float currentAspect = (float) Screen.width / (float) Screen.height;
-        camera.orthographicSize = horizontalResolution / currentAspect / (n);
+        currentAspect = (float) Screen.width / (float) Screen.height;
+        cameraSize = horizontalResolution / currentAspect / (n);
+        camera.orthographicSize = cameraSize + sizeAdd;
     }
 }

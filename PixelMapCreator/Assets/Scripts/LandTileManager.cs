@@ -33,6 +33,7 @@ public class LandTileManager : MonoBehaviour
             for(int y = 0; y < h; y++)
             {
                 tmap.SetTile(new Vector3Int(x, y, 0), null);
+                borderMap.SetTile(new Vector3Int(x, y, 0), null);
             }
         }
     }
@@ -98,7 +99,7 @@ public class LandTileManager : MonoBehaviour
         return circle;
     }
 
-    void paint()
+    void paint(int size, int color)
     {
         Debug.Log((int)brushSlider.value);
         Vector2 touchPos = touch.position;
@@ -108,7 +109,7 @@ public class LandTileManager : MonoBehaviour
         int x = gridPos.x;
         int y = gridPos.y;
 
-        int n = (int)brushSlider.value;
+        int n = size;
 
         bool[][] circle = getCircle(n + 1);
 
@@ -126,17 +127,21 @@ public class LandTileManager : MonoBehaviour
                     {
                         Vector3Int checkPos = new Vector3Int(x - n + i + b.x, y - n + j + b.y, 0);
 
+                        if(b.x == 0 && b.y == 0) 
+                        {
+                            borderMap.SetTile(checkPos, null);
+                            continue;
+                        }
+
                         if(!tmap.HasTile(checkPos))
                         {
                             Debug.Log("check");
-                            borderMap.SetTile(checkPos, borderTiles[0]);
+                            borderMap.SetTile(checkPos, borderTiles[color]);
                         }
                     }
 
                     continue;
                 }
-
-                borderMap.SetTile(new Vector3Int(i, j, 0), null);
             }
         }
     }
@@ -148,9 +153,9 @@ public class LandTileManager : MonoBehaviour
             touch = Input.GetTouch(0);
 
             if(touch.phase == TouchPhase.Began)
-                paint();
+                paint((int)brushSlider.value, 0);
             if(touch.phase == TouchPhase.Moved)
-                paint();
+                paint((int)brushSlider.value, 0);
         }
             
     }
