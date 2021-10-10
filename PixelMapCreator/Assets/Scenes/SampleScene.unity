@@ -360,8 +360,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d13bbb13c2f349b89253aaa07aa9abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontalResolution: 1920
   TileManager: {fileID: 2145527514}
+  horizontalResolution: 1920
 --- !u!4 &344331501
 Transform:
   m_ObjectHideFlags: 0

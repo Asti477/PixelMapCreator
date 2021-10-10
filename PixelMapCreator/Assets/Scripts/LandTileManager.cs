@@ -16,14 +16,33 @@ public class LandTileManager : MonoBehaviour
     [SerializeField]internal int w;
     [SerializeField]internal int h;
 
+    private Coroutine zoomCoroutine;
+
+    Camera camera;
+    Touch firstTouch;
+    Touch secondTouch;
     Touch touch;
+    
+    float sizeAdd = 0f;
+    float zoomSpeed = 0.03f;
+    public float horizontalResolution = 1920f;
+    float currentAspect;
+    float cameraSize;
 
     void Awake()
     {
+        camera = Camera.main;
+        float n = 50f;
+        currentAspect = (float) Screen.width / (float) Screen.height;
+        cameraSize = horizontalResolution / currentAspect / (n);
         brushSlider.minValue = 0;
         brushSlider.maxValue = landTiles.Length - 1;
     }
 
+    void changeCameraSize()
+    {
+        camera.orthographicSize = cameraSize + sizeAdd;
+    }
 
     public void clear()
     {
@@ -145,6 +164,47 @@ public class LandTileManager : MonoBehaviour
             }
         }
     }
+    private void ZoomStart()
+    {
+        zoomCoroutine = StartCoroutine(ZoomDetection());
+    }
+
+    private void ZoomEnd()
+    {
+        StopCoroutine(zoomCoroutine);
+    }
+
+    private void changeSizeAdd(int sign)
+    {
+        sizeAdd += sign * zoomSpeed;
+    }
+
+    IEnumerator ZoomDetection()
+    {
+        float previousDistance = 0f, distance = 0f;
+
+        while(true)
+        {
+            distance = Vector2.Distance(firstTouch.position, secondTouch.position);
+
+            if(distance > previousDistance + 2.5f && sizeAdd > -0.7 * cameraSize)
+            {
+                changeSizeAdd(-1);
+                Debug.Log("prevDis: " + previousDistance);
+                Debug.Log("dis: " + distance);
+            }
+            else if(distance + 2.5f < previousDistance && sizeAdd < 2.5 * cameraSize)
+            {
+                changeSizeAdd(1);
+                Debug.Log("sizeAdd: " + sizeAdd);
+            }
+
+            previousDistance = distance;
+            changeCameraSize();
+
+            yield return null;
+        }
+    }
 
     void Update()
     {
@@ -156,6 +216,18 @@ public class LandTileManager : MonoBehaviour
                 paint((int)brushSlider.value, 0);
             if(touch.phase == TouchPhase.Moved)
                 paint((int)brushSlider.value, 0);
+        }
+        else if(Input.touchCount == 2)
+        {
+            firstTouch = Input.GetTouch(0);
+            secondTouch = Input.GetTouch(1);
+
+            if(firstTouch.phase == TouchPhase.Began)
+                Debug.Log("hi");
+            if(firstTouch.phase == TouchPhase.Moved || secondTouch.phase == TouchPhase.Moved)
+                ZoomStart();
+            if(firstTouch.phase == TouchPhase.Ended || secondTouch.phase == TouchPhase.Ended)
+                ZoomEnd();
         }
             
     }

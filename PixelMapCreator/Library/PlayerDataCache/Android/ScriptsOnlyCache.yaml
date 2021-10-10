@@ -9,7 +9,6 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
     - UnityEditor.U2D.IK.IKEditorManager
-    - UnityEditor.U2D.IK.IKGizmos
     Unity.2D.IK.Runtime.dll:
     - UnityEditor.U2D.IK.IKEditorManagerHelper
     Unity.2D.Tilemap.Editor.dll:
@@ -384,7 +383,7 @@ ScriptsOnlyBuild:
     className: StandaloneInputModule
   - hash:
       serializedVersion: 2
-      Hash: 174c7d14628997bcad0befa730281d7b
+      Hash: 0279137cb71d1d5721e1702108f164f6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LandTileManager
@@ -829,4 +828,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: /Users/luckyrotty/Documents/GitHub/PixelMapCreator/PixelMapCreator/PixelMapCreator.apk
+  playerPath: /Users/luckyrotty/Documents/GitHub/PixelMapCreator/PixelMapCreator/PixelMapCreator2.apk
