@@ -1,4 +1,0 @@
-#Sun Oct 10 10:12:36 KST 2021
-base.0=/Users/luckyrotty/Documents/GitHub/PixelMapCreator/PixelMapCreator/Temp/gradleOut/launcher/build/intermediates/dex/release/out/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
